@@ -17,11 +17,12 @@ class HumanitarianData {
   const dateTo = `${year}-12-31`;
   const limit = 100;
 
-  const queryString = `q=recipient_country=${recipientCountries}&activity_date__gte=${dateFrom}&activity_date__lte=${dateTo}&limit=${limit}`;
+  // const queryString = `q=recipient_country=${recipientCountries}&activity_date__gte=${dateFrom}&activity_date__lte=${dateTo}&limit=${limit}`;
+  const queryString = `q=reportting_org_type=${reportingOrgs}&wt=json&`
 
   const url = `${baseUrl}?${queryString}`;
 
-  return url;
+  return `https://api.iatistandard.org/datastore/activity/select?q=recipient_country=SD&activity_date__gte=2023-03-10&activity_date__lte=2023-03-10&limit=100`;
 } 
 
 
@@ -37,33 +38,35 @@ class HumanitarianData {
       const cachedData = this.cache.get(cacheKey);
 
       if (cachedData) {
+        console.log("was cached bro !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         this.data.set(year, cachedData);
         continue;
       }
 
       const url = this.#getUrl(year);
-      console.log(url);
+
+      // send subscription key to be able to make requests to the api.
       const config = {
         headers: {
-        "Ocp-Apim-Subscription-Key": "1105bb51caec4a0f92b64e3044216cdb",
+        "Ocp-Apim-Subscription-Key": "871f9176e3984e57bb2b57c9323f1250",
       }
       }
       const response = await axios.get(url, config);
 
-      console.log(response)
 
       const contributionsByYear = new Map();
 
       // loop over results and add them to data/cache
-      response.data.forEach((result) => {
-        const organisationName = result.reporting_organisation.name;
-        const amount = Number(result.transaction[0].value.amount);
+      response.data.response.docs.forEach((result) => {
+        console.log(result);
+        // const organisationName = result.reporting_organisation.name;
+        // const amount = Number(result.transaction[0].value.amount);
 
-        if (contributionsByYear.has(organisationName)) {
-          contributionsByYear.set(organisationName, contributionsByYear.get(organisationName) + amount);
-        } else {
-          contributionsByYear.set(organisationName, amount);
-        }
+        // if (contributionsByYear.has(organisationName)) {
+        //   contributionsByYear.set(organisationName, contributionsByYear.get(organisationName) + amount);
+        // } else {
+        //   contributionsByYear.set(organisationName, amount);
+        // }
       });
 
       this.data.set(year, contributionsByYear);
