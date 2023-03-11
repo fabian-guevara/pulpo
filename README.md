@@ -17,7 +17,7 @@ This project retrieves data from the Openaid API and returns the total monetary 
 
 The project has two options for running: CLI and Web.
 
-##CLI Option
+## CLI Option
 To run the project using the CLI, use the following command:
 
 `npm run data <countryCode>`
@@ -29,12 +29,12 @@ To run the project using the Web option, use the following command:
 `npm run start`
 This will start a web server on port 3000. To retrieve data for a specific country, navigate to http://localhost:3000/:countryCode. Replace :countryCode with the code for the country you want to retrieve data for (e.g. SD for Sudan).
 
-##API Key Configuration
+## API Key Configuration
 To use the Openaid API, you'll need an API key. You can obtain one by creating an account on the Openaid Developer Portal.
 
 To configure your API key, create a .env file in the root directory of the project with the following contents:
 
 API_KEY=<your-api-key>
 
-##License
+## License
 This project is licensed under the MIT License. See the LICENSE file for details.
