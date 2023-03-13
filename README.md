@@ -36,5 +36,4 @@ To configure your API key, create a .env file in the root directory of the proje
 
 API_KEY=<your-api-key>
 
-## License
-This project is licensed under the MIT License. See the LICENSE file for details.
+
