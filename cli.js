@@ -13,5 +13,5 @@ const countryCode = process.argv[2].toUpperCase();
 const humanitarianData = new HumanitarianData(countryCode);
 
 humanitarianData.getData()
-  .then((data) => logger.info(JSON.stringify(data)))
+  .then((data) => logger.info(data))
   .catch((error) => logger.error(error.message));
