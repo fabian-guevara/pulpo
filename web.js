@@ -6,8 +6,7 @@ const PORT = 3000;
 const app = express();
 
 app.get('/:countryCode', humanitarianAidMiddleware);
-
-// app.use(errorHandler);
+app.use(errorHandler);
 
 
 
